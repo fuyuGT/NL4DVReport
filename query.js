@@ -1,7 +1,7 @@
 var queries = [
   {
     "query": "show an area chart of how Share evolved over Years by Pos",
-    "accomplished_task": "TRUE",
+    "accomplished_task": "FALSE",
     "query_type": "",
     "NL4DVoutput": {
       "query_raw": "show an area chart of how Share evolved over Years by Pos",
