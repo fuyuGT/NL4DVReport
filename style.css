@@ -1,0 +1,41 @@
+body{
+    font-family: 'Lato', sans-serif;
+    display: flexbox;
+}
+header{
+    text-align: center;
+}
+section{
+    display: flex;  
+    flex-wrap: wrap;
+    border: 0.1px gray groove;
+    overflow: scroll;
+
+}
+li{
+    font-size: 20px;
+    padding: 5px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+li:hover {
+    background-color: rgb(209, 206, 206);
+    
+}
+
+ul{   
+     border: 0.1px gray groove;
+    }
+
+button {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 12px 30px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+
+

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/d3@6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5/build/vega-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.16.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.16.8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.12.2"></script>
+    <script src="query.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+
+    <header>
+        <h1>NL4DV Test Report</h1>
+        <button onclick="expandCharts()">Expand all</button>
+        <button onclick="collapseCharts()">Collapse all</button>
+        <button class="btn" type="submit"
+            onclick="window.open('https://github.com/fuyuGT/mvp_selection_data/blob/master/mvp_1981-2020.csv')"><i
+                class="fa fa-download"></i> Data</button>
+    </header>
+
+
+
+
+    <ul class="good">
+        <h2>These queries work fine</h2>
+
+    </ul>
+
+
+    <ul class="bad">
+        <h2>Not so much</h2>
+
+    </ul>
+
+    <script type="text/javascript">
+
+
+
+        queries.forEach((d, i) => {
+
+            console.log(d.query, d.attributeMap, d.vegaLite)
+
+            if (d.accomplished_task == 'TRUE') {
+                div = d3.select('.good')
+
+            }
+            else {
+                div = d3.select('.bad')
+            }
+
+
+
+            p = div.append('li')
+                .attr('id', `p${i}`)
+                .on('click', function () {
+                    console.log('click');
+                    x = document.getElementById(`sec${i}`)
+
+                    if (x.style.display === "none") {
+                        x.style.display = "block"
+
+                        d3.select(`#p${i}`)
+                            .style('background-color', "rgb(209, 206, 206)")
+                    }
+                    else {
+                        x.style.display = "none"
+
+                        d3.select(`#p${i}`)
+                            .style('background-color', "white")
+                    }
+                })
+
+            sec = div.append('section')
+                .attr('id', `sec${i}`)
+                .attr('class', 'chart')
+                .attr('width', 300)
+                .attr('height', 300)
+
+            p.append('text')
+                .text("Query:" + " " + d.query)
+                .style('fill', 'black')
+
+            vegaEmbed(`#sec${i}`, d.vegaLite)
+
+            d3.selectAll('.chart')
+                .style('display', 'none')
+        });
+
+        function expandCharts() {
+            d3.selectAll('section')
+                .style('display', 'block')
+
+            d3.selectAll('li')
+                .style('background-color', "rgb(209, 206, 206)")
+
+        }
+
+        function collapseCharts() {
+            d3.selectAll('section')
+                .style('display', 'none')
+
+            d3.selectAll('li')
+                .style('background-color', "white")
+        }
+
+    </script>
+</body>
+
+
+</html>
